@@ -3,12 +3,12 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
-	// Use this for initialization
+	public Transform[] spawnPoints;
+
 	void Start () {
 	
 	}
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}
