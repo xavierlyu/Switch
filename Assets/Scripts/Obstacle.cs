@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Obstacle : MonoBehaviour {
 
@@ -7,10 +8,12 @@ public class Obstacle : MonoBehaviour {
 //	public SpriteRenderer sr;
 //	public Sprite normal;
 
+	public static event Action switchDirectionEvent;
+
 	void OnTriggerEnter2D(Collider2D other){
-		if (other.tag == "Player") {	
-			//sr.sprite = collided;
-			PlayerManager.SwitchDirection ();
+		if (other.tag == "Player") {
+			if (switchDirectionEvent != null)
+				switchDirectionEvent ();
 		}
 	}
 
