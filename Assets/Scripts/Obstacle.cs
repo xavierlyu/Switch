@@ -1,26 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 public class Obstacle : MonoBehaviour {
 
-//	public Sprite collided;
-//	public SpriteRenderer sr;
-//	public Sprite normal;
+	public float speed;
 
-	public static event Action switchDirectionEvent;
+	void Start(){
+		Destroy (this.gameObject, 5f);
+	}
+
+	void Update(){
+		transform.Translate (Vector2.right * speed * Time.deltaTime);
+	}
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
-			if (switchDirectionEvent != null)
-				switchDirectionEvent ();
+			Debug.LogError ("Hit!");
 		}
 	}
-
-//	void OnTriggerExit2D(Collider2D other)
-//	{
-//		if (other.tag == "Player") {	
-//			sr.sprite = normal;
-//		}
-//	}
 }

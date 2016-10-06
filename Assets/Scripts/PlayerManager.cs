@@ -4,14 +4,17 @@ using System;
 
 public class PlayerManager : MonoBehaviour {
 
-	public float speed = 7; //goes up first
-	public float spinSpeed = 7;
+	public float speed; //goes up first
+	public float spinSpeed;
 	public GameObject sprite;
-	public Obstacle top;
-	public Obstacle bottom;
+	public Base top;
+	public Base bottom;
+
+	public GameManager gameManager;
 
 	void Start(){
-		Obstacle.switchDirectionEvent += SwitchDirection;
+		gameManager = FindObjectOfType<GameManager> ();
+		Base.switchDirectionEvent += SwitchDirection;
 	}
 
 	void Update () {
