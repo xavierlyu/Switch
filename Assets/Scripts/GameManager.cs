@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
-	public GameObject obj;
-	public Transform[] spawnPoints;
+	public GameObject[] obstacles;
 	float accumulator;
 	public float timeToSpawn;
 	public int score;
@@ -20,11 +19,11 @@ public class GameManager : MonoBehaviour {
 	void Update () {
 		accumulator -= Time.deltaTime;
 		if (accumulator <= 0f) {
-			int randomPositionIndex = Random.Range (0, spawnPoints.Length);
-			if (randomPositionIndex <= 3)
-				(Instantiate (obj, spawnPoints [randomPositionIndex].position, Quaternion.identity) as GameObject).GetComponent<Obstacle> ().speed = Random.Range (1.5f,5f);
-			else if(randomPositionIndex >= 4)
-				(Instantiate (obj, spawnPoints [randomPositionIndex].position, Quaternion.identity) as GameObject).GetComponent<Obstacle> ().speed = Random.Range (-1.5f,-5f);
+			float randomPosition = Random.Range (-3f, 3f);
+			if(Random.value > 0.5f)
+				(Instantiate(obstacles[Random.Range(0,obstacles.Length)], new Vector2(-5f,randomPosition), Quaternion.identity) as GameObject).GetComponent<Obstacle> ().speed = Random.Range (1.5f,5f);
+			else
+				(Instantiate(obstacles[Random.Range(0,obstacles.Length)], new Vector2(5f,randomPosition), Quaternion.identity) as GameObject).GetComponent<Obstacle> ().speed = Random.Range (-1.5f,-5f);
 			accumulator = timeToSpawn;
 		}
 	}
