@@ -6,7 +6,6 @@ public class PlayerManager : MonoBehaviour {
 
 	public float speed; //goes up first
 	public float spinSpeed;
-	public GameObject sprite;
 	public Base top;
 	public Base bottom;
 
@@ -28,8 +27,8 @@ public class PlayerManager : MonoBehaviour {
 			speed = Mathf.Abs (speed) * (-1);
 			spinSpeed = Mathf.Abs (spinSpeed) * (-1);
 		}
-		transform.Translate (Vector2.up * speed * Time.deltaTime);
-		sprite.transform.Rotate (Vector3.forward * spinSpeed);
+		transform.Translate (Vector2.up * speed * Time.deltaTime, Space.World);
+		transform.Rotate (Vector3.forward * spinSpeed, Space.Self);
 	}
 
 	public void SwitchDirection(){
