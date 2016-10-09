@@ -12,13 +12,12 @@ public class PlayerManager : MonoBehaviour {
 	public GameManager gameManager;
 
 	void Start(){
+		spinSpeed = 5f;
 		gameManager = FindObjectOfType<GameManager> ();
 		Base.switchDirectionEvent += SwitchDirection;
 	}
 
 	void Update () {
-		if (Input.GetMouseButtonUp (0))
-			SwitchDirection ();
 		if (transform.position.y < bottom.transform.position.y) {
 			speed = Mathf.Abs (speed);
 			spinSpeed = Mathf.Abs (spinSpeed);
