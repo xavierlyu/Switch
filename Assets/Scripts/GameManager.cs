@@ -48,11 +48,20 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	public void OnPlayerDeath(){
+		isHit = true;
+		isGameStarted = false;
+		Obstacle.OnPlayerHit -= OnPlayerDeath;
+	}
+
 	public void OnUserClick(){
 		if (isGameStarted) {
 			player.SwitchDirection ();
 		} else {
+			Obstacle.OnPlayerHit += OnPlayerDeath;
+			score = 0;
 			player.speed = 5f;
+			isHit = false;
 			isGameStarted = true;
 			foreach (Text t in texts)
 				t.enabled = false;

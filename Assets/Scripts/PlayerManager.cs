@@ -14,7 +14,8 @@ public class PlayerManager : MonoBehaviour {
 	void Start(){
 		spinSpeed = 5f;
 		gameManager = FindObjectOfType<GameManager> ();
-		Base.switchDirectionEvent += SwitchDirection;
+		Base.OnPlayerSwitchDirection += SwitchDirection;
+		Obstacle.OnPlayerHit += OnPlayerDeath;
 	}
 
 	void Update () {
@@ -29,9 +30,13 @@ public class PlayerManager : MonoBehaviour {
 		transform.Translate (Vector2.up * speed * Time.deltaTime, Space.World);
 		transform.Rotate (Vector3.forward * spinSpeed, Space.Self);
 	}
-
+		
 	public void SwitchDirection(){
 		speed *= -1;
 		spinSpeed *= -1;
+	}
+
+	public void OnPlayerDeath(){
+		speed = 0f;
 	}
 }
