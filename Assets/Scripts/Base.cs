@@ -4,7 +4,7 @@ using System;
 
 public class Base : MonoBehaviour {
 
-	static bool flag;//true = top; false = bottom
+	public static bool flag;//true = top; false = bottom
 	public static event Action OnPlayerSwitchDirection;
 	public static GameManager gameManager;
 

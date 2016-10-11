@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour {
 	public Text[] texts;//texts wanted to be disabled when game starts
 	public Button[] buttons;//buttons wanted to be disabled when game starts
 
+	public Animator[] gameStartAnimators;
+
 	void Start () {
 		player = FindObjectOfType<PlayerManager> (); 
 		isGameStarted = false;
@@ -43,8 +45,9 @@ public class GameManager : MonoBehaviour {
 		if (!isHit) {
 			score++;
 			scoreText.text = score + "";
-			player.speed = 0.06f * score + 5.0f;
-			player.spinSpeed = 0.06f * score + 5.0f;
+			player.speed += 0.05f;
+			player.spinSpeed += 0.05f;
+			timeToSpawn -= 0.015f;
 		}
 	}
 
@@ -58,18 +61,19 @@ public class GameManager : MonoBehaviour {
 		if (isGameStarted) {
 			player.SwitchDirection ();
 		} else {
+			//game init goes here
+			foreach(Animator a in gameStartAnimators){
+				a.SetTrigger ("GameStart");
+			}
 			Obstacle.OnPlayerHit += OnPlayerDeath;
 			score = 0;
 			player.speed = 5f;
 			isHit = false;
 			isGameStarted = true;
-			foreach (Text t in texts)
-				t.enabled = false;
-			foreach (Button b in buttons) {
-				b.enabled = false;
-				b.image.enabled = false;
-			}
 			scoreText.enabled = true;
+			timeToSpawn = 1.3f;
+			scoreText.text = 0+"";
+			Base.flag = true;
 		}
 	}
 }
