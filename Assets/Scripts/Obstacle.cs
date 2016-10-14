@@ -19,7 +19,6 @@ public class Obstacle : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
-			GameManager.isHit = true;
 			if (OnPlayerHit != null)
 				OnPlayerHit ();
 		}

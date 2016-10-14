@@ -19,6 +19,18 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	void Update () {
+		if(GameManager.gameStatus == GameStatus.AfterEnd){
+			speed = Mathf.Lerp (speed, 0f, Time.deltaTime * 2f);
+			spinSpeed = Mathf.Lerp (spinSpeed, 0f, Time.deltaTime * 2f);
+			if (Mathf.Abs(speed) < 0.05f && Mathf.Abs(spinSpeed) < 0.05f) {
+				speed = 0f;
+				spinSpeed = 0f;
+			}
+		}
+		else if(GameManager.gameStatus == GameStatus.BeforeStart){
+			speed = 0f;
+			spinSpeed = 5f;
+		}
 		if (transform.position.y < bottom.transform.position.y) {
 			speed = Mathf.Abs (speed);
 			spinSpeed = Mathf.Abs (spinSpeed);
@@ -37,6 +49,5 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	public void OnPlayerDeath(){
-		speed = 0f;
 	}
 }
