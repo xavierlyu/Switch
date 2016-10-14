@@ -39,11 +39,17 @@ public class GameManager : MonoBehaviour {
 		if (gameStatus == GameStatus.InGame) {
 			accumulator -= Time.deltaTime;
 			if (accumulator <= 0f) {
-				float randomPosition = Random.Range (-3f, 3f);
-				if (Random.value > 0.5f)
-					(Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (-5f, randomPosition), Quaternion.identity) as GameObject).GetComponent<Obstacle> ().speed = Random.Range (1.5f, 5f);
-				else
-					(Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (5f, randomPosition), Quaternion.identity) as GameObject).GetComponent<Obstacle> ().speed = Random.Range (-1.5f, -5f);
+				float randomPosition = Random.Range (-2.7f, 3f);
+				float randomSize = Random.Range (0.5f, 0.9f);
+				GameObject temp;
+				if (Random.value > 0.5f) {
+					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (-5f, randomPosition), Quaternion.identity) as GameObject;
+					temp.GetComponent<Obstacle> ().speed = Random.Range (1.5f, 5f);
+				} else {
+					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (5f, randomPosition), Quaternion.identity) as GameObject;
+					temp.GetComponent<Obstacle> ().speed = Random.Range (-1.5f, -5f);
+				}
+				temp.transform.localScale = new Vector3 (randomSize, randomSize, 1f);
 				accumulator = timeToSpawn;
 			}
 		}
@@ -53,9 +59,9 @@ public class GameManager : MonoBehaviour {
 		if (gameStatus == GameStatus.InGame) {
 			score++;
 			scoreText.text = score + "";
-			player.speed += 0.05f;
-			player.spinSpeed += 0.05f;
-			timeToSpawn -= 0.015f;
+			player.speed += Mathf.Sign(player.speed) * 0.08f;
+			player.spinSpeed = player.speed;
+			timeToSpawn -= 0.02f;
 		}
 	}
 
@@ -85,21 +91,24 @@ public class GameManager : MonoBehaviour {
 			player.speed = 5f;
 			gameStatus = GameStatus.InGame;
 			scoreText.enabled = true;
-			timeToSpawn = 1.3f;
+			timeToSpawn = 1f;
 			scoreText.text = 0+"";
 			Base.flag = true;
 		}
 		else if(gameStatus == GameStatus.AfterEnd){
-			foreach(Animator a in gameStartAnimators){
-				a.SetBool ("Flag", false);
+			if (gameEndAnimators[0].GetCurrentAnimatorStateInfo (0).IsName("ScoreTextIn") && 
+				gameEndAnimators[0].GetCurrentAnimatorStateInfo (0).normalizedTime > 1 && !gameEndAnimators[0].IsInTransition (0)) {//if the animation is finished
+				foreach(Animator a in gameStartAnimators){
+					a.SetBool ("Flag", false);
+				}
+				foreach (Animator a in gameEndAnimators) {
+					a.SetBool ("Flag", false);
+				}
+				gameStatus = GameStatus.BeforeStart;
+				scoreText.enabled = false;
+				player.gameObject.transform.position = new Vector3 (0f,0f,0f);
+				playerAnimator.SetBool ("Flag", false);
 			}
-			foreach (Animator a in gameEndAnimators) {
-				a.SetBool ("Flag", false);
-			}
-			gameStatus = GameStatus.BeforeStart;
-			scoreText.enabled = false;
-			player.gameObject.transform.position = new Vector3 (0f,0f,0f);
-			playerAnimator.SetBool ("Flag", false);
 		}
 	}
 }

@@ -10,11 +10,14 @@ public class Obstacle : MonoBehaviour {
 
 	void Start(){
 		Destroy (this.gameObject, 5f);
+		if (gameObject.name.Equals ("kunai(Clone)") && transform.position.x < 0)
+			transform.Rotate (0f,0f,-180f);
 	}
 
 	void Update(){
 		transform.Translate (Vector2.right * speed * Time.deltaTime, Space.World);
-		transform.Rotate (Vector3.forward * -speed, Space.Self);
+		if(!gameObject.name.Equals("kunai(Clone)"))
+			transform.Rotate (Vector3.forward * -speed, Space.Self);
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
