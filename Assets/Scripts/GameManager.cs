@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour {
 			accumulator -= Time.deltaTime;
 			if (accumulator <= 0f) {
 				float randomPosition = Random.Range (-2.7f, 3f);
-				float randomSize = Random.Range (0.5f, 0.9f);
+				float randomSize = Random.Range (0.5f, 0.85f);
 				GameObject temp;
 				if (Random.value > 0.5f) {
 					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (-5f, randomPosition), Quaternion.identity) as GameObject;
