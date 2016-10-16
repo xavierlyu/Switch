@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour {
 				}
 				gameStatus = GameStatus.BeforeStart;
 				scoreText.enabled = false;
-				player.gameObject.transform.position = new Vector3 (0f,0f,0f);
+				player.gameObject.transform.position = new Vector3 (0f,0f,-2f);
 				playerAnimator.SetBool ("Flag", false);
 			}
 		}
