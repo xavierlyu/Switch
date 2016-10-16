@@ -27,30 +27,43 @@ public class GameManager : MonoBehaviour {
 	public Animator playerAnimator;
 	public Animator[] gameStartAnimators;
 	public Animator[] gameEndAnimators;
-
+	float speedConstant;
+	float spawnConstant;
 	void Start () {
 		gameStatus = GameStatus.BeforeStart;
 		player = FindObjectOfType<PlayerManager> (); 
 		score = 0;
 		accumulator = timeToSpawn;
+		speedConstant = 1;
+		spawnConstant = 1;
 	}
 	
 	void Update () {
+		
+		
 		if (gameStatus == GameStatus.InGame) {
+			speedConstant += Time.deltaTime / 100;
+			spawnConstant -= Time.deltaTime / 500;
+
+			if (speedConstant > 2)
+				speedConstant = 2;
+			if (spawnConstant < 0.5f)
+				spawnConstant = 0.5f;
+			
 			accumulator -= Time.deltaTime;
 			if (accumulator <= 0f) {
-				float randomPosition = Random.Range (-2.7f, 3f);
-				float randomSize = Random.Range (0.5f, 0.85f);
+				float randomPosition = Mathf.Ceil(Random.Range (-2.7f, 3f));
+				float randomSize = Random.Range (0.5f, 0.75f);
 				GameObject temp;
 				if (Random.value > 0.5f) {
 					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (-5f, randomPosition), Quaternion.identity) as GameObject;
-					temp.GetComponent<Obstacle> ().speed = Random.Range (1.5f, 5f);
+					temp.GetComponent<Obstacle> ().speed = Random.Range (0.75f, 2f)*speedConstant;
 				} else {
 					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (5f, randomPosition), Quaternion.identity) as GameObject;
-					temp.GetComponent<Obstacle> ().speed = Random.Range (-1.5f, -5f);
+					temp.GetComponent<Obstacle> ().speed = Random.Range (-0.75f, -2f)*speedConstant;
 				}
 				temp.transform.localScale = new Vector3 (randomSize, randomSize, 1f);
-				accumulator = timeToSpawn;
+				accumulator = timeToSpawn * spawnConstant;
 			}
 		}
 	}

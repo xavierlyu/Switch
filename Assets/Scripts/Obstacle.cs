@@ -9,7 +9,7 @@ public class Obstacle : MonoBehaviour {
 	public static event Action OnPlayerHit;//called when the player is hit by an obstacle
 
 	void Start(){
-		Destroy (this.gameObject, 5f);
+		Destroy (this.gameObject, 10f);
 		if (gameObject.name.Equals ("kunai(Clone)") && transform.position.x < 0)
 			transform.Rotate (0f,0f,-180f);
 	}
