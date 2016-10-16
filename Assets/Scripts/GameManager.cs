@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour {
 		gameStatus = GameStatus.BeforeStart;
 		player = FindObjectOfType<PlayerManager> (); 
 		score = 0;
-		accumulator = timeToSpawn;
 		speedConstant = 1;
 		spawnConstant = 1;
 	}
@@ -104,7 +103,7 @@ public class GameManager : MonoBehaviour {
 			player.speed = 5f;
 			gameStatus = GameStatus.InGame;
 			scoreText.enabled = true;
-			timeToSpawn = 1f;
+			accumulator = timeToSpawn;
 			scoreText.text = 0+"";
 			Base.flag = true;
 		}
