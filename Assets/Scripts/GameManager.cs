@@ -21,48 +21,44 @@ public class GameManager : MonoBehaviour {
 
 	public Text scoreText;
 	public Text highScoreText;
-	public Text[] texts;//texts wanted to be disabled when game starts
-	public Button[] buttons;//buttons wanted to be disabled when game starts
+	public Text coinText;
 
 	public Animator playerAnimator;
 	public Animator[] gameStartAnimators;
 	public Animator[] gameEndAnimators;
-	float speedConstant;
-	float spawnConstant;
+
+	public Image soundButtonImage;
+	public Sprite soundOn;
+	public Sprite soundOff;
+
+	public Sprite[] backgroundSprites;
+	public Image backgroundImage;
+
 	void Start () {
 		gameStatus = GameStatus.BeforeStart;
 		player = FindObjectOfType<PlayerManager> (); 
 		score = 0;
-		speedConstant = 1;
-		spawnConstant = 1;
+		soundButtonImage.sprite = PlayerPrefs.GetInt ("SoundOn?") == 1 ? soundOn : soundOff;//0 = off, 1 = on
+		coinText.text = PlayerPrefs.GetInt("Coins") + "";
+		backgroundImage.sprite = backgroundSprites[Random.Range(0, backgroundSprites.Length)];
 	}
 	
 	void Update () {
-		
-		
 		if (gameStatus == GameStatus.InGame) {
-			speedConstant += Time.deltaTime / 100;
-			spawnConstant -= Time.deltaTime / 500;
-
-			if (speedConstant > 2)
-				speedConstant = 2;
-			if (spawnConstant < 0.5f)
-				spawnConstant = 0.5f;
-			
 			accumulator -= Time.deltaTime;
 			if (accumulator <= 0f) {
-				float randomPosition = Mathf.Ceil(Random.Range (-2.7f, 3f));
-				float randomSize = Random.Range (0.5f, 0.75f);
+				float randomPosition = Random.Range (-2.7f, 3f);
+				float randomSize = Random.Range (0.5f, 0.85f);
 				GameObject temp;
 				if (Random.value > 0.5f) {
 					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (-5f, randomPosition), Quaternion.identity) as GameObject;
-					temp.GetComponent<Obstacle> ().speed = Random.Range (0.75f, 2f)*speedConstant;
+					temp.GetComponent<Obstacle> ().speed = Random.Range (1.5f, 5f);
 				} else {
 					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (5f, randomPosition), Quaternion.identity) as GameObject;
-					temp.GetComponent<Obstacle> ().speed = Random.Range (-0.75f, -2f)*speedConstant;
+					temp.GetComponent<Obstacle> ().speed = Random.Range (-1.5f, -5f);
 				}
 				temp.transform.localScale = new Vector3 (randomSize, randomSize, 1f);
-				accumulator = timeToSpawn * spawnConstant;
+				accumulator = timeToSpawn;
 			}
 		}
 	}
@@ -94,33 +90,57 @@ public class GameManager : MonoBehaviour {
 			player.SwitchDirection ();
 		} 
 		else if (gameStatus == GameStatus.BeforeStart){
-			//game init goes here
-			foreach(Animator a in gameStartAnimators){
-				a.SetBool ("Flag", true);
+			if (gameStartAnimators [0].GetCurrentAnimatorStateInfo (0).IsName ("TextFadeIn") &&
+				gameStartAnimators [0].GetCurrentAnimatorStateInfo (0).normalizedTime > 1 && !gameStartAnimators [0].IsInTransition (0)) {//if the animation is finished
+				//game init goes here
+				foreach(Animator a in gameStartAnimators){
+					a.SetBool ("Flag", true);
+				}
+				Obstacle.OnPlayerHit += OnPlayerDeath;
+				CoinManager.OnCoinHit += UpdateCoinText;
+				score = 0;
+				player.speed = 5f;
+				gameStatus = GameStatus.InGame;
+				scoreText.enabled = true;
+				accumulator = timeToSpawn;
+				scoreText.text = 0+"";
+				Base.flag = true;
 			}
-			Obstacle.OnPlayerHit += OnPlayerDeath;
-			score = 0;
-			player.speed = 5f;
-			gameStatus = GameStatus.InGame;
-			scoreText.enabled = true;
-			accumulator = timeToSpawn;
-			scoreText.text = 0+"";
-			Base.flag = true;
 		}
 		else if(gameStatus == GameStatus.AfterEnd){
 			if (gameEndAnimators[0].GetCurrentAnimatorStateInfo (0).IsName("ScoreTextIn") && 
 				gameEndAnimators[0].GetCurrentAnimatorStateInfo (0).normalizedTime > 1 && !gameEndAnimators[0].IsInTransition (0)) {//if the animation is finished
-				foreach(Animator a in gameStartAnimators){
-					a.SetBool ("Flag", false);
-				}
-				foreach (Animator a in gameEndAnimators) {
-					a.SetBool ("Flag", false);
-				}
+				StartCoroutine("AnimationDelay");
 				gameStatus = GameStatus.BeforeStart;
 				scoreText.enabled = false;
 				player.gameObject.transform.position = new Vector3 (0f,0f,-2f);
 				playerAnimator.SetBool ("Flag", false);
+				CoinManager.OnCoinHit -= UpdateCoinText;
 			}
 		}
+	}
+
+	IEnumerator AnimationDelay(){
+		foreach (Animator a in gameEndAnimators) {
+			a.SetBool ("Flag", false);
+		}
+		yield return new WaitForSeconds (1f);
+		foreach(Animator a in gameStartAnimators){
+			a.SetBool ("Flag", false);
+		}
+	}
+
+	public void OnToggleSound(Image img){
+		if (img.sprite.name.Contains ("On")) {
+			img.sprite = soundOff;
+			PlayerPrefs.SetInt ("SoundOn?", 0);//0 = off, 1 = on
+		} else {
+			img.sprite = soundOn;
+			PlayerPrefs.SetInt ("SoundOn?", 1);//0 = off, 1 = on
+		}
+	}
+
+	public void UpdateCoinText(){
+		coinText.text = PlayerPrefs.GetInt ("Coins") + "";
 	}
 }
