@@ -143,4 +143,34 @@ public class GameManager : MonoBehaviour {
 	public void UpdateCoinText(){
 		coinText.text = PlayerPrefs.GetInt ("Coins") + "";
 	}
+
+	/// <summary>
+	/// Is the device connected to internet
+	/// </summary>
+	/// <returns><c>true</c>, device has internet connection, <c>false</c> device doesn't have internet connection.</returns>
+	public static bool isConnectedToInternet()
+	{
+		#if UNITY_EDITOR
+		if (Network.player.ipAddress.ToString() != "127.0.0.1")
+			return true;
+		return false;
+		#endif
+		#if UNITY_IPHONE || UNITY_ANDROID
+		if (Application.internetReachability == NetworkReachability.ReachableViaLocalAreaNetwork || Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork)
+			return true;
+		return false;
+		#endif
+	}
+
+	public void RateApp(){
+		#if UNITY_ANDROID
+			Application.OpenURL("market://details?id=YOUR_ID");
+		#elif UNITY_IPHONE
+			Application.OpenURL("itms-apps://itunes.apple.com/app/idYOUR_ID");
+		#endif
+	}
+
+	public void OpenFBPage(){
+		Application.OpenURL ("https://www.facebook.com/ketchappgames/");
+	}
 }

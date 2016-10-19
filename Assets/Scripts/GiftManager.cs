@@ -16,7 +16,7 @@ public class GiftManager : MonoBehaviour {
 	public Sprite[] sprites;
 
 	void Start () {
-		if (PlayerPrefs.GetString ("GiftTimestamp").Equals (null)) {
+		if (PlayerPrefs.GetInt ("HighScore") == 0) {
 			DateTime now = DateTime.UtcNow;
 			PlayerPrefs.SetString ("GiftTimestamp", now.ToString());
 		}
@@ -33,10 +33,6 @@ public class GiftManager : MonoBehaviour {
 	}
 
 	public void ReceiveGift(){
-		if (PlayerPrefs.GetString ("GiftTimestamp").Equals (null)) {
-			DateTime now = DateTime.UtcNow;
-			PlayerPrefs.SetString ("GiftTimestamp", now.ToString());
-		}
 		DateTime last = DateTime.Parse(PlayerPrefs.GetString ("GiftTimestamp"));
 		if (DateTime.UtcNow - last >= TimeSpan.Parse (timeInterval)) {
 			//receive coins
