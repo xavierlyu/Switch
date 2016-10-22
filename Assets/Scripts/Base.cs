@@ -8,8 +8,7 @@ public class Base : MonoBehaviour {
 	public static event Action OnPlayerSwitchDirection;
 	public static GameManager gameManager;
 	public Sprite notBent;
-	public Sprite bentUp;
-	public Sprite bentDown;
+	public Sprite bent;
 	private SpriteRenderer sr;
 
 	void Start(){
@@ -19,14 +18,7 @@ public class Base : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		if(this.gameObject.tag.Equals("BaseBottom"))
-		{
-			sr.sprite = bentDown;
-		}
-		else if(this.gameObject.tag.Equals("BaseTop"))
-		{
-			sr.sprite = bentUp;
-		}
+		sr.sprite = bent;
 		if (other.tag == "Player") {
 			if (OnPlayerSwitchDirection != null)
 				OnPlayerSwitchDirection ();
@@ -37,7 +29,7 @@ public class Base : MonoBehaviour {
 		}
 	}
 
-	void onTriggerExit()
+	void OnTriggerExit2D()
 	{
 		sr.sprite = notBent;
 	}
