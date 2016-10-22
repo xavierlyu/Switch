@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
 
 	public Text scoreText;
 	public Text highScoreText;
-	public Text coinText;
+	public Text[] coinTexts;
 
 	public Animator playerAnimator;
 	public Animator[] gameStartAnimators;
@@ -34,12 +34,16 @@ public class GameManager : MonoBehaviour {
 	public Sprite[] backgroundSprites;
 	public Image backgroundImage;
 
+	public Canvas shopCanvas;
+	public Canvas mainCanvas;
+
 	void Start () {
 		gameStatus = GameStatus.BeforeStart;
 		player = FindObjectOfType<PlayerManager> (); 
 		score = 0;
 		soundButtonImage.sprite = PlayerPrefs.GetInt ("SoundOn?") == 1 ? soundOn : soundOff;//0 = off, 1 = on
-		coinText.text = PlayerPrefs.GetInt("Coins") + "";
+		foreach(Text c in coinTexts)
+			c.text = PlayerPrefs.GetInt("Coins") + "";
 		backgroundImage.sprite = backgroundSprites[Random.Range(0, backgroundSprites.Length)];
 	}
 	
@@ -69,7 +73,7 @@ public class GameManager : MonoBehaviour {
 			scoreText.text = score + "";
 			player.speed += Mathf.Sign(player.speed) * 0.08f;
 			player.spinSpeed = player.speed;
-			timeToSpawn -= 0.02f;
+			timeToSpawn -= 0.015f;
 		}
 	}
 
@@ -100,6 +104,7 @@ public class GameManager : MonoBehaviour {
 				CoinManager.OnCoinHit += UpdateCoinText;
 				score = 0;
 				player.speed = 5f;
+				timeToSpawn = 1f;
 				gameStatus = GameStatus.InGame;
 				scoreText.enabled = true;
 				accumulator = timeToSpawn;
@@ -141,7 +146,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void UpdateCoinText(){
-		coinText.text = PlayerPrefs.GetInt ("Coins") + "";
+		foreach(Text c in coinTexts)
+			c.text = PlayerPrefs.GetInt("Coins") + "";
 	}
 
 	/// <summary>
@@ -172,5 +178,10 @@ public class GameManager : MonoBehaviour {
 
 	public void OpenFBPage(){
 		Application.OpenURL ("https://www.facebook.com/ketchappgames/");
+	}
+
+	public void ToggleShopCanvas(){
+		shopCanvas.enabled = !shopCanvas.enabled;
+		mainCanvas.enabled = !mainCanvas.enabled;
 	}
 }
