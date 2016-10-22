@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
 		if (gameStatus == GameStatus.InGame) {
 			accumulator -= Time.deltaTime;
 			if (accumulator <= 0f) {
-				float randomPosition = Random.Range (-2.7f, 3f);
+				float randomPosition = Random.Range (-2.5f, 3f);
 				float randomSize = Random.Range (0.5f, 0.85f);
 				GameObject temp;
 				if (Random.value > 0.5f) {

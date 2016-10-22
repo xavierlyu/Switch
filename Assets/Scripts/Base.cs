@@ -7,19 +7,17 @@ public class Base : MonoBehaviour {
 	public static bool flag;//true = top; false = bottom
 	public static event Action OnPlayerSwitchDirection;
 	public static GameManager gameManager;
-	public Sprite notBent;
-	public Sprite bent;
-	private SpriteRenderer sr;
+	private Animator anim;
 
 	void Start(){
+		anim = GetComponent<Animator> ();
 		gameManager = FindObjectOfType<GameManager> ();
 		flag = true;
-		sr = GetComponent<SpriteRenderer>();
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
-		sr.sprite = bent;
 		if (other.tag == "Player") {
+			StartCoroutine ("PlayOneShot");
 			if (OnPlayerSwitchDirection != null)
 				OnPlayerSwitchDirection ();
 			if((this.gameObject.tag.Equals("BaseTop") && flag) || (this.gameObject.tag.Equals("BaseBottom") && !flag)){
@@ -29,8 +27,9 @@ public class Base : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerExit2D()
-	{
-		sr.sprite = notBent;
+	IEnumerator PlayOneShot(){
+		anim.SetTrigger("Collided");
+		yield return new WaitForSeconds(0.2f);
+		anim.ResetTrigger ("Collided");
 	}
 }
