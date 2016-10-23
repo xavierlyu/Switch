@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void OnPlayerDeath(){
+		GetComponent<AudioSource> ().Play (); //play death sound
 		gameStatus = GameStatus.AfterEnd;
 		if (score > PlayerPrefs.GetInt ("HighScore"))
 			PlayerPrefs.SetInt ("HighScore", score);

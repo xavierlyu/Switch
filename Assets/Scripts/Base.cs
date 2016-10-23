@@ -17,6 +17,7 @@ public class Base : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
+			GetComponent<AudioSource> ().Play (); // play bounce sound
 			StartCoroutine ("PlayOneShot");
 			if (OnPlayerSwitchDirection != null)
 				OnPlayerSwitchDirection ();

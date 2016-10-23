@@ -44,6 +44,7 @@ public class PlayerManager : MonoBehaviour {
 	}
 		
 	public void SwitchDirection(){
+		GetComponent<AudioSource> ().Play ();  //play switch sound
 		speed *= -1;
 		spinSpeed *= -1;
 	}
