@@ -10,8 +10,10 @@ public class PlayerManager : MonoBehaviour {
 	public Base bottom;
 
 	public GameManager gameManager;
+	private AudioSource audioSource;
 
 	void Start(){
+		audioSource = GetComponent<AudioSource> ();
 		spinSpeed = 5f;
 		gameManager = FindObjectOfType<GameManager> ();
 		Base.OnPlayerSwitchDirection += SwitchDirection;
@@ -44,11 +46,12 @@ public class PlayerManager : MonoBehaviour {
 	}
 		
 	public void SwitchDirection(){
-		GetComponent<AudioSource> ().Play ();  //play switch sound
 		speed *= -1;
 		spinSpeed *= -1;
 	}
 
 	public void OnPlayerDeath(){
+		if(GameManager.isAudioOn)
+			audioSource.Play ();  //play switch sound
 	}
 }

@@ -8,8 +8,10 @@ public class Base : MonoBehaviour {
 	public static event Action OnPlayerSwitchDirection;
 	public static GameManager gameManager;
 	private Animator anim;
+	private AudioSource audioSource;
 
 	void Start(){
+		audioSource = GetComponent<AudioSource> ();
 		anim = GetComponent<Animator> ();
 		gameManager = FindObjectOfType<GameManager> ();
 		flag = true;
@@ -17,7 +19,8 @@ public class Base : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
-			GetComponent<AudioSource> ().Play (); // play bounce sound
+			if(GameManager.isAudioOn)
+				audioSource.Play (); // play bounce sound
 			StartCoroutine ("PlayOneShot");
 			if (OnPlayerSwitchDirection != null)
 				OnPlayerSwitchDirection ();

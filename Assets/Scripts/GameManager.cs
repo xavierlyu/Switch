@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
 	float accumulator;
 	public float timeToSpawn;
 	public int score;
+	public static bool isAudioOn;
 	public static GameStatus gameStatus;
 
 	public PlayerManager player;
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour {
 	public Animator[] gameStartAnimators;
 	public Animator[] gameEndAnimators;
 
+	private AudioSource audioSource;
+
 	public Image soundButtonImage;
 	public Sprite soundOn;
 	public Sprite soundOff;
@@ -38,10 +41,18 @@ public class GameManager : MonoBehaviour {
 	public Canvas mainCanvas;
 
 	void Start () {
+		audioSource = GetComponent<AudioSource> ();
 		gameStatus = GameStatus.BeforeStart;
 		player = FindObjectOfType<PlayerManager> (); 
 		score = 0;
-		soundButtonImage.sprite = PlayerPrefs.GetInt ("SoundOn?") == 1 ? soundOn : soundOff;//0 = off, 1 = on
+		if(PlayerPrefs.GetInt ("SoundOn?") == 1){//0 = off, 1 = on
+			soundButtonImage.sprite = soundOn;
+			isAudioOn = true;
+		} 
+		else{
+			soundButtonImage.sprite = soundOff;
+			isAudioOn = false;
+		}
 		foreach(Text c in coinTexts)
 			c.text = PlayerPrefs.GetInt("Coins") + "";
 		backgroundImage.sprite = backgroundSprites[Random.Range(0, backgroundSprites.Length)];
@@ -78,10 +89,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void OnPlayerDeath(){
-		GetComponent<AudioSource> ().Play (); //play death sound
 		gameStatus = GameStatus.AfterEnd;
-		if (score > PlayerPrefs.GetInt ("HighScore"))
+		if (score > PlayerPrefs.GetInt ("HighScore")) {
 			PlayerPrefs.SetInt ("HighScore", score);
+			GameObject.Find("best score text").GetComponent<Text> ().color = new Color (255f,0f,0f,160f);
+		}
 		highScoreText.text = "BEST " + PlayerPrefs.GetInt ("HighScore");
 		playerAnimator.SetBool ("Flag", true);
 		foreach (Animator a in gameEndAnimators) {
@@ -111,6 +123,7 @@ public class GameManager : MonoBehaviour {
 				accumulator = timeToSpawn;
 				scoreText.text = 0+"";
 				Base.flag = true;
+				GameObject.Find("best score text").GetComponent<Text> ().color = new Color (56f,56f,56f,0f);
 			}
 		}
 		else if(gameStatus == GameStatus.AfterEnd){
@@ -140,9 +153,17 @@ public class GameManager : MonoBehaviour {
 		if (img.sprite.name.Contains ("On")) {
 			img.sprite = soundOff;
 			PlayerPrefs.SetInt ("SoundOn?", 0);//0 = off, 1 = on
+			isAudioOn = false;
 		} else {
 			img.sprite = soundOn;
 			PlayerPrefs.SetInt ("SoundOn?", 1);//0 = off, 1 = on
+			isAudioOn = true;
+		}
+	}
+
+	public void PlayButtonSound(){//called when a button is pressed
+		if(isAudioOn){
+			audioSource.Play ();
 		}
 	}
 
