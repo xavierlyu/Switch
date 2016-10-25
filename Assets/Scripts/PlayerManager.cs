@@ -51,7 +51,7 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	public void OnPlayerDeath(){
-		if(GameManager.isAudioOn)
+		if(GameManager.isAudioOn && GameManager.gameStatus == GameStatus.InGame) //added extra condition so game must start to hear switch sound
 			audioSource.Play ();  //play switch sound
 	}
 }

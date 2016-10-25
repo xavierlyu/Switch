@@ -43,7 +43,7 @@ TextureImporter:
   textureFormat: -1
   maxTextureSize: 2048
   textureSettings:
-    filterMode: -1
+    filterMode: 2
     aniso: 16
     mipBias: -1
     wrapMode: 1
@@ -60,14 +60,11 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    serializedVersion: 2
     sprites:
-    - serializedVersion: 2
-      name: coin sprite sheet_0
+    - name: coin sprite sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -77,10 +74,14 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_1
+      outline:
+      - - {x: -15, y: 24}
+        - {x: -24, y: 21}
+        - {x: -24, y: -19}
+        - {x: -23, y: -24}
+        - {x: 24, y: -24}
+        - {x: 24, y: 24}
+    - name: coin sprite sheet_1
       rect:
         serializedVersion: 2
         x: 55
@@ -90,10 +91,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_2
+      outline:
+      - - {x: -23.5, y: 24.5}
+        - {x: -23.5, y: -20.5}
+        - {x: -19.5, y: -24.5}
+        - {x: 18.5, y: -24.5}
+        - {x: 23.5, y: -22.5}
+        - {x: 23.5, y: 22.5}
+        - {x: 21.5, y: 24.5}
+    - name: coin sprite sheet_2
       rect:
         serializedVersion: 2
         x: 114
@@ -103,10 +109,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_3
+      outline:
+      - - {x: -11, y: 24}
+        - {x: -17, y: 20}
+        - {x: -17, y: -21}
+        - {x: -16, y: -24}
+        - {x: 15, y: -24}
+        - {x: 17, y: -23}
+        - {x: 17, y: 16}
+        - {x: 11, y: 24}
+    - name: coin sprite sheet_3
       rect:
         serializedVersion: 2
         x: 180
@@ -117,9 +129,7 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_4
+    - name: coin sprite sheet_4
       rect:
         serializedVersion: 2
         x: 225
@@ -129,10 +139,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_5
+      outline:
+      - - {x: -11, y: 24}
+        - {x: -17, y: 15}
+        - {x: -17, y: -15}
+        - {x: -11, y: -24}
+        - {x: 16, y: -24}
+        - {x: 17, y: -19}
+        - {x: 17, y: 21}
+        - {x: 13, y: 24}
+    - name: coin sprite sheet_5
       rect:
         serializedVersion: 2
         x: 274
@@ -142,10 +158,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_6
+      outline:
+      - - {x: -13.5, y: 24.5}
+        - {x: -21.5, y: 19.5}
+        - {x: -21.5, y: -16.5}
+        - {x: -10.5, y: -24.5}
+        - {x: 19.5, y: -24.5}
+        - {x: 21.5, y: -19.5}
+        - {x: 21.5, y: 22.5}
+        - {x: 17.5, y: 24.5}
+    - name: coin sprite sheet_6
       rect:
         serializedVersion: 2
         x: 324
@@ -155,10 +177,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_7
+      outline:
+      - - {x: 17.5, y: 24}
+        - {x: -24.5, y: 24}
+        - {x: -24.5, y: -20}
+        - {x: -16.5, y: -24}
+        - {x: 17.5, y: -24}
+        - {x: 24.5, y: -13}
+        - {x: 24.5, y: 16}
+    - name: coin sprite sheet_7
       rect:
         serializedVersion: 2
         x: 377
@@ -168,10 +195,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_8
+      outline:
+      - - {x: -21.5, y: 24}
+        - {x: -24.5, y: 15}
+        - {x: -24.5, y: -18}
+        - {x: -17.5, y: -24}
+        - {x: 17.5, y: -24}
+        - {x: 24.5, y: -18}
+        - {x: 24.5, y: 16}
+        - {x: 21.5, y: 24}
+    - name: coin sprite sheet_8
       rect:
         serializedVersion: 2
         x: 432
@@ -181,10 +214,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_9
+      outline:
+      - - {x: -18, y: 24.5}
+        - {x: -23, y: 17.5}
+        - {x: -23, y: -21.5}
+        - {x: -15, y: -24.5}
+        - {x: 18, y: -24.5}
+        - {x: 23, y: -17.5}
+        - {x: 23, y: 22.5}
+        - {x: 16, y: 24.5}
+    - name: coin sprite sheet_9
       rect:
         serializedVersion: 2
         x: 491
@@ -194,10 +233,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_10
+      outline:
+      - - {x: -15.5, y: 24}
+        - {x: -17.5, y: 17}
+        - {x: -17.5, y: -19}
+        - {x: -12.5, y: -24}
+        - {x: 15.5, y: -24}
+        - {x: 17.5, y: -18}
+        - {x: 17.5, y: 21}
+        - {x: 13.5, y: 24}
+    - name: coin sprite sheet_10
       rect:
         serializedVersion: 2
         x: 559
@@ -208,9 +253,7 @@ TextureImporter:
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_11
+    - name: coin sprite sheet_11
       rect:
         serializedVersion: 2
         x: 603
@@ -220,10 +263,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_12
+      outline:
+      - - {x: 11, y: 24}
+        - {x: -15, y: 24}
+        - {x: -17, y: 22}
+        - {x: -17, y: -20}
+        - {x: -16, y: -24}
+        - {x: 11, y: -24}
+        - {x: 17, y: -17}
+        - {x: 17, y: 22}
+    - name: coin sprite sheet_12
       rect:
         serializedVersion: 2
         x: 652
@@ -233,10 +282,16 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: coin sprite sheet_13
+      outline:
+      - - {x: -17, y: 24.5}
+        - {x: -21, y: 18.5}
+        - {x: -21, y: -20.5}
+        - {x: -17, y: -24.5}
+        - {x: 16, y: -24.5}
+        - {x: 21, y: -22.5}
+        - {x: 21, y: 15.5}
+        - {x: 16, y: 24.5}
+    - name: coin sprite sheet_13
       rect:
         serializedVersion: 2
         x: 702
@@ -246,8 +301,15 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
+      outline:
+      - - {x: -22, y: 24}
+        - {x: -24, y: 17}
+        - {x: -24, y: -16}
+        - {x: -14, y: -24}
+        - {x: 17, y: -24}
+        - {x: 24, y: -16}
+        - {x: 24, y: 22}
+        - {x: 17, y: 24}
     outline: []
   spritePackingTag: 
   userData: 
