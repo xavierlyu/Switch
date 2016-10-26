@@ -21,10 +21,8 @@ public class CoinManager : Obstacle {
 	protected override void OnTriggerEnter2D (Collider2D other)
 	{
 		PlayerPrefs.SetInt ("Coins", PlayerPrefs.GetInt("Coins") + 1);
-		if(GameManager.isAudioOn)
-			audioSource.Play ();
 		if (OnCoinHit != null)
 			OnCoinHit ();
-		Destroy (this.gameObject, 0.3f);
+		Destroy (this.gameObject);
 	}
 }
