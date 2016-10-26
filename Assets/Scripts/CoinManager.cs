@@ -9,22 +9,26 @@ public class CoinManager : Obstacle {
 
 	// Use this for initialization
 	void Start () {
+		transform.localScale = new Vector3 (0.75f, 0.75f, 0.75f); //prevents random coin size, I think it looks better not changing
 		audioSource = GetComponent<AudioSource> ();
 		Destroy (this.gameObject, 5f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
 		transform.Translate (Vector2.right * speed * Time.deltaTime, Space.World);
 	}
 
 	protected override void OnTriggerEnter2D (Collider2D other)
 	{
 		PlayerPrefs.SetInt ("Coins", PlayerPrefs.GetInt("Coins") + 1);
-		if(GameManager.isAudioOn)
+			GetComponent<Animator> ().Play ("coinCollected");
+		if (GameManager.isAudioOn) 
 			audioSource.Play ();
+		
 		if (OnCoinHit != null)
 			OnCoinHit ();
-		Destroy (this.gameObject, 0.3f);
+		Destroy (this.gameObject, 0.5f);
 	}
 }
