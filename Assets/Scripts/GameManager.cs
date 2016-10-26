@@ -28,8 +28,7 @@ public class GameManager : MonoBehaviour {
 	public Animator[] gameStartAnimators;
 	public Animator[] gameEndAnimators;
 
-	private static AudioSource audioSource;
-	public AudioClip switchClip;
+	private AudioSource audioSource;
 
 	public Image soundButtonImage;
 	public Sprite soundOn;
@@ -93,10 +92,9 @@ public class GameManager : MonoBehaviour {
 		gameStatus = GameStatus.AfterEnd;
 		if (score > PlayerPrefs.GetInt ("HighScore")) {
 			PlayerPrefs.SetInt ("HighScore", score);
-			highScoreText.text = "NEW BEST";
+			GameObject.Find("best score text").GetComponent<Text> ().color = new Color (255f,0f,0f,160f);
 		}
-		else
-			highScoreText.text = "BEST " + PlayerPrefs.GetInt ("HighScore");
+		highScoreText.text = "BEST " + PlayerPrefs.GetInt ("HighScore");
 		playerAnimator.SetBool ("Flag", true);
 		foreach (Animator a in gameEndAnimators) {
 			a.SetBool ("Flag", true);
@@ -125,6 +123,7 @@ public class GameManager : MonoBehaviour {
 				accumulator = timeToSpawn;
 				scoreText.text = 0+"";
 				Base.flag = true;
+				GameObject.Find("best score text").GetComponent<Text> ().color = new Color (56f,56f,56f,0f);
 			}
 		}
 		else if(gameStatus == GameStatus.AfterEnd){
@@ -164,14 +163,11 @@ public class GameManager : MonoBehaviour {
 
 	public void PlayButtonSound(){//called when a button is pressed
 		if(isAudioOn){
-			audioSource.PlayOneShot (switchClip);
+			audioSource.Play ();
 		}
 	}
 
 	public void UpdateCoinText(){
-		if (isAudioOn) {
-			audioSource.Play ();
-		}
 		foreach(Text c in coinTexts)
 			c.text = PlayerPrefs.GetInt("Coins") + "";
 	}
