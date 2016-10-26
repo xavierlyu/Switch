@@ -16,17 +16,15 @@ public class CoinManager : Obstacle {
 	
 	// Update is called once per frame
 	void Update () {
-		
 		transform.Translate (Vector2.right * speed * Time.deltaTime, Space.World);
 	}
 
 	protected override void OnTriggerEnter2D (Collider2D other)
 	{
 		PlayerPrefs.SetInt ("Coins", PlayerPrefs.GetInt("Coins") + 1);
-			GetComponent<Animator> ().Play ("coinCollected");
+		GetComponent<Animator> ().Play ("coinCollected");
 		if (GameManager.isAudioOn) 
 			audioSource.Play ();
-		
 		if (OnCoinHit != null)
 			OnCoinHit ();
 		Destroy (this.gameObject, 0.5f);

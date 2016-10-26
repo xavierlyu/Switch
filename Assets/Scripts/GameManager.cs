@@ -92,9 +92,10 @@ public class GameManager : MonoBehaviour {
 		gameStatus = GameStatus.AfterEnd;
 		if (score > PlayerPrefs.GetInt ("HighScore")) {
 			PlayerPrefs.SetInt ("HighScore", score);
-			GameObject.Find("best score text").GetComponent<Text> ().color = new Color (255f,0f,0f,160f);
+			highScoreText.text = "NEW BEST";
 		}
-		highScoreText.text = "BEST " + PlayerPrefs.GetInt ("HighScore");
+		else
+			highScoreText.text = "BEST " + PlayerPrefs.GetInt ("HighScore");
 		playerAnimator.SetBool ("Flag", true);
 		foreach (Animator a in gameEndAnimators) {
 			a.SetBool ("Flag", true);
@@ -123,7 +124,6 @@ public class GameManager : MonoBehaviour {
 				accumulator = timeToSpawn;
 				scoreText.text = 0+"";
 				Base.flag = true;
-				GameObject.Find("best score text").GetComponent<Text> ().color = new Color (56f,56f,56f,0f);
 			}
 		}
 		else if(gameStatus == GameStatus.AfterEnd){
