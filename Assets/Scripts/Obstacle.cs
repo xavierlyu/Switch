@@ -13,8 +13,11 @@ public class Obstacle : MonoBehaviour {
 	}
 
 	void Update(){
-		transform.Translate (Vector2.right * speed * Time.deltaTime, Space.World);
+		transform.Translate (1 * speed * Time.deltaTime, 0, 0f, Space.World);
 		transform.Rotate (-speed/2.0f, -speed, -speed/2.0f, Space.Self);
+		if (transform.position.y < -7f) {
+			Destroy (this.gameObject);
+		}
 	}
 
 	protected virtual void OnTriggerEnter(Collider other){

@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour {
 			accumulator -= Time.deltaTime;
 			if (accumulator <= 0f) {
 				float randomPosition = Random.Range (-2.5f, 3f);
-				float randomSize = Random.Range (0.3f, 0.6f);
+				float randomSize = Random.Range (0.2f, 0.4f);
 				GameObject temp;
 				if (Random.value > 0.5f) {
 					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector3 (-5f, randomPosition, -1f), Quaternion.identity) as GameObject;
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour {
 			score++;
 			scoreText.text = score + "";
 			player.speed += Mathf.Sign(player.speed) * 0.08f;
-			player.spinSpeed = player.speed;
+			player.spinSpeed += Mathf.Sign(player.spinSpeed) * 0.08f;
 			timeToSpawn -= 0.015f;
 		}
 	}
