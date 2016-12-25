@@ -1,0 +1,16 @@
+﻿Revert "Merge remote-tracking branch 'origin/master'"
+
+This reverts commit 595e73f3f5168aaa41a3b07c21acd23c64e2ebcb, reversing
+changes made to ce1ecaf1236dbb6ba6631d0b5a4a7a50bde2080b.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+	modified:   ProjectSettings/EditorSettings.asset
+	modified:   ProjectSettings/GraphicsSettings.asset
+	modified:   ProjectSettings/ProjectSettings.asset
+	modified:   ProjectSettings/ProjectVersion.txt
+
