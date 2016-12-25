@@ -9,7 +9,10 @@ public class PlayerManager : MonoBehaviour {
 	public Base top;
 	public Base bottom;
 
+	public Transform referencePoint;
+
 	public GameManager gameManager;
+	public Transform parent;
 	private AudioSource audioSource;
 
 	void Start(){
@@ -41,8 +44,8 @@ public class PlayerManager : MonoBehaviour {
 			speed = Mathf.Abs (speed) * (-1);
 			spinSpeed = Mathf.Abs (spinSpeed) * (-1);
 		}
-		transform.Translate (Vector2.up * speed * Time.deltaTime, Space.World);
-		transform.Rotate (Vector3.forward * spinSpeed, Space.Self);
+		parent.Translate (Vector2.up * speed * Time.deltaTime, Space.World);
+		transform.Rotate (spinSpeed, 1f * Mathf.Sign(spinSpeed), 1f * Mathf.Sign(spinSpeed), Space.Self);
 	}
 		
 	public void SwitchDirection(){
