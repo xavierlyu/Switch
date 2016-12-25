@@ -17,7 +17,7 @@ public class Base : MonoBehaviour {
 		flag = true;
 	}
 
-	void OnTriggerEnter(Collider other){
+	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
 			if(GameManager.isAudioOn)
 				audioSource.Play (); // play bounce sound

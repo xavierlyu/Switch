@@ -63,16 +63,16 @@ public class GameManager : MonoBehaviour {
 			accumulator -= Time.deltaTime;
 			if (accumulator <= 0f) {
 				float randomPosition = Random.Range (-2.5f, 3f);
-				float randomSize = Random.Range (0.2f, 0.4f);
+				float randomSize = Random.Range (0.5f, 0.85f);
 				GameObject temp;
 				if (Random.value > 0.5f) {
-					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector3 (-5f, randomPosition, -1f), Quaternion.identity) as GameObject;
+					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (-5f, randomPosition), Quaternion.identity) as GameObject;
 					temp.GetComponent<Obstacle> ().speed = Random.Range (1.5f, 5f);
 				} else {
-					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector3 (5f, randomPosition, -1f), Quaternion.identity) as GameObject;
+					temp = Instantiate (obstacles [Random.Range (0, obstacles.Length)], new Vector2 (5f, randomPosition), Quaternion.identity) as GameObject;
 					temp.GetComponent<Obstacle> ().speed = Random.Range (-1.5f, -5f);
 				}
-				temp.transform.localScale = new Vector3 (randomSize, randomSize, randomSize);
+				temp.transform.localScale = new Vector3 (randomSize, randomSize, 1f);
 				accumulator = timeToSpawn;
 			}
 		}
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour {
 			score++;
 			scoreText.text = score + "";
 			player.speed += Mathf.Sign(player.speed) * 0.08f;
-			player.spinSpeed += Mathf.Sign(player.spinSpeed) * 0.08f;
+			player.spinSpeed = player.speed;
 			timeToSpawn -= 0.015f;
 		}
 	}
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour {
 				StartCoroutine("AnimationDelay");
 				gameStatus = GameStatus.BeforeStart;
 				scoreText.enabled = false;
-				player.parent.gameObject.transform.position = new Vector3 (0f,0f,-1f);
+				player.gameObject.transform.position = new Vector3 (0f,0f,-2f);
 				playerAnimator.SetBool ("Flag", false);
 				CoinManager.OnCoinHit -= UpdateCoinText;
 			}

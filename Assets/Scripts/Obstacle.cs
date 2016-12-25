@@ -10,17 +10,17 @@ public class Obstacle : MonoBehaviour {
 
 	void Start(){
 		Destroy (this.gameObject, 5f);
+		if (gameObject.name.Equals ("kunai(Clone)") && transform.position.x < 0)
+			transform.Rotate (0f,0f,-180f);
 	}
 
 	void Update(){
-		transform.Translate (1 * speed * Time.deltaTime, 0, 0f, Space.World);
-		transform.Rotate (-speed/2.0f, -speed, -speed/2.0f, Space.Self);
-		if (transform.position.y < -7f) {
-			Destroy (this.gameObject);
-		}
+		transform.Translate (Vector2.right * speed * Time.deltaTime, Space.World);
+		if(!gameObject.name.Equals("kunai(Clone)"))
+			transform.Rotate (Vector3.forward * -speed, Space.Self);
 	}
 
-	protected virtual void OnTriggerEnter(Collider other){
+	protected virtual void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
 			if (OnPlayerHit != null)
 				OnPlayerHit ();

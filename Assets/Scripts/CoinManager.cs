@@ -19,7 +19,7 @@ public class CoinManager : Obstacle {
 		transform.Translate (Vector2.right * speed * Time.deltaTime, Space.World);
 	}
 
-	protected override void OnTriggerEnter (Collider other)
+	protected override void OnTriggerEnter2D (Collider2D other)
 	{
 		PlayerPrefs.SetInt ("Coins", PlayerPrefs.GetInt("Coins") + 1);
 		GetComponent<Animator> ().Play ("coinCollected");
