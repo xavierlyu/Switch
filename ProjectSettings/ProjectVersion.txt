@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 m_EditorVersion: 5.4.2f2
+=======
+m_EditorVersion: 5.4.1f1
+>>>>>>> parent of 8d2ca62... Still need to fix switch audio.  Tweaked animations.  Game is smoother 60 fps. Less input lag audio lag fixed.
 m_StandardAssetsVersion: 0
