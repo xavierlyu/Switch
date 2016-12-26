@@ -10,21 +10,38 @@ public class Base : MonoBehaviour {
 	private Animator anim;
 	private AudioSource audioSource;
 
+	private static Sprite base_notLit;//aka you
+	public Sprite base_lit;
+
 	void Start(){
+		base_notLit = gameObject.GetComponent<SpriteRenderer> ().sprite;
+		if (gameObject.tag.Equals ("BaseTop")) {
+			gameObject.GetComponent<SpriteRenderer> ().sprite = base_lit;
+		} else {
+			gameObject.GetComponent<SpriteRenderer> ().sprite = base_notLit;
+		}
 		audioSource = GetComponent<AudioSource> ();
 		anim = GetComponent<Animator> ();
 		gameManager = FindObjectOfType<GameManager> ();
 		flag = true;
 	}
 
+	void Update(){
+		if (tag.Equals ("BaseTop")) {
+			GetComponent<SpriteRenderer> ().sprite = flag ? base_lit : base_notLit;
+		} else {
+			GetComponent<SpriteRenderer> ().sprite = flag ? base_notLit : base_lit;
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.tag == "Player") {
 			if(GameManager.isAudioOn)
 				audioSource.Play (); // play bounce sound
-			StartCoroutine ("PlayOneShot");
+			//StartCoroutine ("PlayOneShot");
 			if (OnPlayerSwitchDirection != null)
 				OnPlayerSwitchDirection ();
-			if((this.gameObject.tag.Equals("BaseTop") && flag) || (this.gameObject.tag.Equals("BaseBottom") && !flag)){
+			if((gameObject.tag.Equals("BaseTop") && flag) || (gameObject.tag.Equals("BaseBottom") && !flag)){
 				gameManager.Scored ();
 				flag = !flag;
 			}

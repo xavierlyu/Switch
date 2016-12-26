@@ -1,7 +1,7 @@
 fileFormatVersion: 2
-guid: a7c0e42ee31f0475c94cc2adcd78e015
-timeCreated: 1476569338
-licenseType: Free
+guid: 16e4c70346d28664e946e0ca7f6d7fa4
+timeCreated: 1482630753
+licenseType: Pro
 TrueTypeFontImporter:
   serializedVersion: 4
   fontSize: 16
@@ -10,8 +10,9 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - DomoAregato
-  fallbackFontReferences: []
+  - Exo
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 129c541d4dbaaa848af622ef4e9efa76, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

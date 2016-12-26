@@ -34,9 +34,6 @@ public class GameManager : MonoBehaviour {
 	public Sprite soundOn;
 	public Sprite soundOff;
 
-	public Sprite[] backgroundSprites;
-	public Image backgroundImage;
-
 	public Canvas shopCanvas;
 	public Canvas mainCanvas;
 
@@ -55,7 +52,6 @@ public class GameManager : MonoBehaviour {
 		}
 		foreach(Text c in coinTexts)
 			c.text = PlayerPrefs.GetInt("Coins") + "";
-		backgroundImage.sprite = backgroundSprites[Random.Range(0, backgroundSprites.Length)];
 	}
 	
 	void Update () {
