@@ -46,8 +46,10 @@ public class PlayerManager : MonoBehaviour {
 	}
 		
 	public void SwitchDirection(){
-		speed *= -1;
-		spinSpeed *= -1;
+		if (transform.position.y > bottom.transform.position.y && transform.position.y < top.transform.position.y) {
+			speed *= -1;
+			spinSpeed *= -1;
+		}
 	}
 
 	public void OnPlayerDeath(){

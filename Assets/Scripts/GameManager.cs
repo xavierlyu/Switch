@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour {
 
 	public Text scoreText;
 	public Text highScoreText;
-	public Text[] coinTexts;
 
 	public Animator playerAnimator;
 	public Animator[] gameStartAnimators;
@@ -34,7 +33,6 @@ public class GameManager : MonoBehaviour {
 	public Sprite soundOn;
 	public Sprite soundOff;
 
-	public Canvas shopCanvas;
 	public Canvas mainCanvas;
 
 	void Start () {
@@ -50,8 +48,6 @@ public class GameManager : MonoBehaviour {
 			soundButtonImage.sprite = soundOff;
 			isAudioOn = false;
 		}
-		foreach(Text c in coinTexts)
-			c.text = PlayerPrefs.GetInt("Coins") + "";
 	}
 	
 	void Update () {
@@ -113,7 +109,7 @@ public class GameManager : MonoBehaviour {
 				Obstacle.OnPlayerHit += OnPlayerDeath;
 				CoinManager.OnCoinHit += UpdateCoinText;
 				score = 0;
-				player.speed = 5f;
+				player.speed = 4.5f;
 				timeToSpawn = 1f;
 				gameStatus = GameStatus.InGame;
 				scoreText.enabled = true;
@@ -164,8 +160,6 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void UpdateCoinText(){
-		foreach(Text c in coinTexts)
-			c.text = PlayerPrefs.GetInt("Coins") + "";
 	}
 
 	/// <summary>
@@ -195,11 +189,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void OpenFBPage(){
-		Application.OpenURL ("https://www.facebook.com/ketchappgames/");
+		Application.OpenURL ("https://www.appaneer.com");
 	}
 
 	public void ToggleShopCanvas(){
-		shopCanvas.enabled = !shopCanvas.enabled;
 		mainCanvas.enabled = !mainCanvas.enabled;
 	}
 }
